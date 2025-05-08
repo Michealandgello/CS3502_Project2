@@ -182,7 +182,7 @@ class FeedbackQueueScheduler : ISchedulingPolicy
 
         foreach (var j in jobs.OrderBy(j => j.JobId))
         {
-            int wait = j.FirstRun - j.EntryTime; // Waiting Time: Time spent in the queue before running
+            int wait = j.CompletionTime - j.EntryTime - j.RunDuration; // Waiting Time: Time spent in the queue before running
             int turn = j.CompletionTime - j.EntryTime; // Turnaround Time: Total time from arrival to finish
             int resp = j.FirstRun - j.EntryTime; // Response Time (optional): Time from arrival to first run
             totalWait += wait;
